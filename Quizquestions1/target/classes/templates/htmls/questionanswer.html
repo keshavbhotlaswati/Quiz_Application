@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    .wrong {
+  background-color: tomato;
+
+  padding: 10px;
+}
+
+.style1{
+	background-color: yellow;
+	}
+	.style2{
+	background-color: lightblue;
+	}
+	.style3{
+	background-color: orange;
+	}
+	.style4{
+	background-color: lightgreen;
+	}
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	
+}
+
+body {
+	width: 100%;
+	overflow-x: hidden;
+	
+}
+
+h1 {
+	font-size: 22px;
+	text-align: center;
+	padding: 15px 25px;
+	border-radius: 4px;
+}
+
+
+
+.option {
+	display: flex;
+	flex-direction: row;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 500;
+	color: red;
+}
+
+.option p {
+	margin-left: 15px;
+	position: relative;
+	margin-top: -6px;
+}
+.main-container {
+	min-height: calc(100vh - 136px);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	
+		
+}
+.container{
+background-color:yellow;
+}
+
+    </style>
+    <!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet">
+	<title>Quiz Solution  Page</title>
+	
+</head>
+<body>
+
+
+	
+	
+	<h1 class="bg-danger text-light" style="text-align:center">SOLUTION</h1>
+	
+	<div class="style1 d-block mx-auto mt-4">
+
+	<div class="main-container py-8 px-9" >
+		
+	<form action="/" method="POST"  th:object=${qform3}>
+	
+			<div class="style2" th:each="ques:${qform3}">
+			
+				Q<p class="title" th:text="${ques.question}"> </p>
+				<div class="option">Option 1:
+				
+					<input type="radio" th:checked="${ques.chosen_answer==1}"/>
+					<th:block>
+					<p  th:text="${ques.choice1}"  th:style="${ques.chosen_answer==1 and ques.chosen_answer !=ques.correct_answer} ? 'background-color:tomato':''"
+					 th:styleappend="${ques.chosen_answer==1 and ques.chosen_answer==ques.correct_answer}? 'background-color:lightgreen':''">
+					
+					
+					</p>
+			</th:block>
+				</div>
+				
+				<div class="option">Option 2:
+					<input type="radio" th:checked="${ques.chosen_answer==2}"/>
+					<th:block>
+					<p th:text="${ques.choice2}"  th:style="${ques.chosen_answer==2 and ques.chosen_answer!=ques.correct_answer}?'background-color:tomato':''"
+					 th:styleappend="${ques.chosen_answer==2 and ques.chosen_answer==ques.correct_answer}? 'background-color:lightgreen':''"
+				>
+		</p>
+		</th:block>
+			</div>
+				<div class="option"> Option 3:
+					<input type="radio" th:checked="${ques.chosen_answer==3}" />
+					<p th:text="${ques.choice3}" th:style="${ques.chosen_answer==3 and ques.chosen_answer!=ques.correct_answer} ? 'background-color:tomato':''"
+					th:styleappend="${ques.chosen_answer==3 and ques.chosen_answer==ques.correct_answer}? 'background-color:lightgreen':''"></p>
+				
+			
+				
+				</div>
+				
+			<div class="option">Option 4:
+					<input type="radio"  th:checked="${ques.chosen_answer==4}" /><p th:text="${ques.choice4}"  th:style="${ques.chosen_answer==4 and ques.chosen_answer !=ques.correct_answer} ? 'background-color:tomato':''"
+					th:styleappend="${ques.chosen_answer==4 and ques.chosen_answer==ques.correct_answer}? 'background-color:lightgreen':''"></p>
+					</div>
+				
+				<div th:if="${ques.chosen_answer!=ques.correct_answer}" class="style3">
+			    
+				                         Incorrect Option
+				<b th:text="${ques.comment}" ></b>
+				<br></br>
+					Correct Option: Option <b th:text="${ques.correct_answer}"></b><br></br>
+					
+					</div>
+						<div th:if="${ques.chosen_answer==ques.correct_answer}" class="style4">
+						Correct Option
+						</div>
+				<div class="style1">	
+				<input type="hidden"  th:value="${ques.id}" />
+				<input type="hidden"  th:value="${ques.question}" />
+				
+				
+
+		
+		</div>
+		</div>
+		
+		 <a th:href="@{'/home'}"	class=" btn btn-danger d-block mx-auto mt-4">Back to Homepage
+		</a>
+		 <a th:href="@{'/result'}"	class=" btn btn-danger d-block mx-auto mt-4">Score
+		</a>
+		</form>
+		</div>
+		</div>
+		
+		
+		
+		
+		
+	<!--
+
+	<div class ="style2" th:each="ques:${ques_list}">
+	Question:
+	<b th:text="${ques.question}"></b>
+	choices1:
+	<b th:text="${ques.choice1}"></b>
+	chpices2:
+	<b th:text="${ques.choice2}"></b>
+	choices3:
+	<b th:text="${ques.choice3}"></b>
+	choices4:
+	<b th:text="${ques.choice4}"></b>
+	<br></br>
+	Answer:
+	<b th:text="${ques.chosen_answer}"></b>
+	Comment:
+	<br></br>
+	<b th:if="${ques.chosen_answer!=ques.correct_answer}">
+	
+	<b th:text="${ques.comment}"></b>
+	</b>
+	
+	</div>
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
