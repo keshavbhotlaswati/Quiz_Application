@@ -18,8 +18,7 @@ import com.swati.quizquestions.repositories.Resultrepos;
 
 @Service
 public class QuizService {
-	@Autowired
-	Questions question;
+	
 	@Autowired
 	QuestionForm questionForm;
 	@Autowired
@@ -28,7 +27,8 @@ public class QuizService {
 	Result result;
 	@Autowired
 	 Resultrepos rRepo;
-
+@Autowired
+Questions question1;
 	
 	public QuestionForm getQuestions() {
 		List<Questions> allQues = questionrepos.findAll();
@@ -96,23 +96,22 @@ int count=0;
 		
 		qlist.forEach(e->{System.out.println("helloww workd" + e);});
 	}
-	public List<Questions> setQuestions1(QuestionForm qform) {
+	public List<Questions> save_Questions1(QuestionForm qform) {
 	
 	List<Questions> questionList = new ArrayList<Questions>();
 		for(Questions q1: qform.getQuestion()) {
-			
-			question.setQuestion(q1.getQuestion());
-			question.setId(q1.getId());
-			question.setComment(q1.getComment());
-			question.setChosen_answer(q1.getChosen_answer());
+			question1=new Questions();
+		    question1=save(q1);
 			Questions q8=setchoices(q1);
-		
-			question.setChoice1(q8.getChoice1());
-	        question.setChoice2(q8.getChoice2());
-			question.setChoice3(q8.getChoice3());
-			question.setChoice4(q8.getChoice4());
-			question.setCorrect_answer(q8.getCorrect_answer());
-			questionList.add(question);
+				
+			question1.setChoice1(q8.getChoice1());
+			System.out.println("choices" + q8.getChoice1());
+	        question1.setChoice2(q8.getChoice2());
+			question1.setChoice3(q8.getChoice3());
+			question1.setChoice4(q8.getChoice4());
+			question1.setCorrect_answer(q8.getCorrect_answer());
+	Questions q10=questionrepos.save(question1);
+			questionList.add(q10);
 			
 		} 
 		printlist(questionList);
@@ -126,6 +125,15 @@ int count=0;
 	return q7;
 }
 
+	public Questions save(Questions q1) {
+		question1=new Questions();
+		question1.setQuestion(q1.getQuestion());
+		question1.setId(q1.getId());
+		question1.setComment(q1.getComment());
+		question1.setChosen_answer(q1.getChosen_answer());
+		
+	return question1;
 	
+	}
 	
 }
