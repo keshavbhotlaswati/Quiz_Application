@@ -24,12 +24,7 @@
 	.style4{
 	background-color: lightgreen;
 	}
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	
-}
+
 
 body {
 	width: 100%;
@@ -57,16 +52,11 @@ h1 {
 	color: red;
 }
 
-.option p {
-	margin-left: 15px;
-	position: relative;
-	margin-top: -6px;
-}
 .main-container {
 	min-height: calc(100vh - 136px);
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	flex-direction: row;
+	
 	
 		
 }
@@ -91,7 +81,7 @@ background-color:yellow;
 	<div class="style1 d-block mx-auto mt-4">
 
 	<div class="main-container py-8 px-9" >
-		
+ 
 	<form action="/" method="POST"  th:object=${qform3}>
 	
 			<div class="style2" th:each="ques:${qform3}">
@@ -146,10 +136,6 @@ background-color:yellow;
 				<div class="style1">	
 				<input type="hidden"  th:value="${ques.id}" />
 				<input type="hidden"  th:value="${ques.question}" />
-				
-				
-
-		
 		</div>
 		</div>
 		
@@ -165,30 +151,7 @@ background-color:yellow;
 		
 		
 		
-	<!--
 
-	<div class ="style2" th:each="ques:${ques_list}">
-	Question:
-	<b th:text="${ques.question}"></b>
-	choices1:
-	<b th:text="${ques.choice1}"></b>
-	chpices2:
-	<b th:text="${ques.choice2}"></b>
-	choices3:
-	<b th:text="${ques.choice3}"></b>
-	choices4:
-	<b th:text="${ques.choice4}"></b>
-	<br></br>
-	Answer:
-	<b th:text="${ques.chosen_answer}"></b>
-	Comment:
-	<br></br>
-	<b th:if="${ques.chosen_answer!=ques.correct_answer}">
-	
-	<b th:text="${ques.comment}"></b>
-	</b>
-	
-	</div>
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
