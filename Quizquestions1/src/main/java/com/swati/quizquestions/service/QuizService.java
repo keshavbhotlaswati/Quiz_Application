@@ -86,16 +86,7 @@ int count=0;
 		return savedresult;
 	}
 	
-	//public List<Result> getTopScore() {
-	//	List<Result> sList = rRepo.findAll(Sort.by(Sort.Direction.DESC, "totalCorrect"));
-		
-		//return sList;
-	//}
-
-	public void printlist(List<Questions> qlist) {
-		
-		qlist.forEach(e->{System.out.println("helloww workd" + e);});
-	}
+	
 	public List<Questions> save_Questions1(QuestionForm qform) {
 	
 	List<Questions> questionList = new ArrayList<Questions>();
@@ -105,7 +96,7 @@ int count=0;
 			Questions q8=setchoices(q1);
 				
 			question1.setChoice1(q8.getChoice1());
-			System.out.println("choices" + q8.getChoice1());
+		
 	        question1.setChoice2(q8.getChoice2());
 			question1.setChoice3(q8.getChoice3());
 			question1.setChoice4(q8.getChoice4());
@@ -114,7 +105,7 @@ int count=0;
 			questionList.add(q10);
 			
 		} 
-		printlist(questionList);
+		
 
 		
 		return questionList;
