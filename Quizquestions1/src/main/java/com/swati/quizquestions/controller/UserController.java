@@ -44,21 +44,33 @@ public String showRegistrationPage() {
 	return "htmls/registerUser";
 }
 	@RequestMapping(value="registerUser",method=RequestMethod.POST)
-	public String register(@ModelAttribute("user")User user) {
-	user1.save(user);
+	public String register(@ModelAttribute("user")User user,ModelMap map) {
+		
+		if(user.getEmail()==null || user.getFirstName()==null || user.getLastName()==null ||user.getPassword()==null) {
+		map.addAttribute("msg","Kindly fill all the details");	
+			return "htmls/registerUser";
+		}
+		else {
+	user1.save(user);}
+		
 	return "htmls/login";
 	}
 	
 	
 	@RequestMapping("/showlogin")
 public String showloginPage(){
-		System.out.println("hellow world loginf ");
+	
 	return "htmls/login";
 }
 	
 
 	@RequestMapping(value="login" ,method=RequestMethod.POST )
 	public String login(@RequestParam("email")String email,@RequestParam("password")String password,ModelMap map){
+		
+			if(email.isEmpty() || password.isEmpty()) {
+				map.addAttribute("msg", "Kindly enter the data in the fields");
+				return "htmls/login";
+			}
 		User user=user1.findByEmail(email);
 	if(user.getEmail().equals(email) 
 			&& user.getPassword().equals(password)) {
@@ -71,8 +83,9 @@ public String showloginPage(){
 		return "htmls/quizetime";
 	}
 	else { map.addAttribute("msg", "incorrect username or password please check once .");
-	}
-	return "htmls/login";
+	
+	return "htmls/login";}
+	
 	}
 	
 
